@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="km">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sunday Sound Checklist · ICF Khnar</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Kantumruy+Pro:wght@400;600;700&display=swap">
+<style>
+:root{
+  --bg:#F5F6F8; --surface:#FFFFFF; --ink:#16181D; --muted:#5B6270; --line:#DDE1E7;
+  --accent:#D9661F; --accent-ink:#FFFFFF; --done:#2E7D4F; --done-bg:#E6F3EB; --rule-bg:#16181D; --rule-ink:#F5F6F8;
+  color-scheme:light;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#111318; --surface:#1B1E25; --ink:#EEF0F3; --muted:#A3AAB6; --line:#2C313B;
+    --accent:#F08A3E; --accent-ink:#111318; --done:#7DD3A0; --done-bg:#16301F; --rule-bg:#F08A3E; --rule-ink:#111318;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#111318; --surface:#1B1E25; --ink:#EEF0F3; --muted:#A3AAB6; --line:#2C313B;
+  --accent:#F08A3E; --accent-ink:#111318; --done:#7DD3A0; --done-bg:#16301F; --rule-bg:#F08A3E; --rule-ink:#111318;
+  color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 90px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,'Kantumruy Pro',system-ui,sans-serif;font-size:16px;line-height:1.45}
+.kh{font-family:'Kantumruy Pro',Inter,system-ui,sans-serif;line-height:1.6}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--surface)}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--surface);border-bottom:1px solid var(--line)}
+.hwrap{max-width:640px;margin:0 auto;padding:14px 18px 12px}
+.team{font-size:13px;color:var(--muted);margin:0}
+h1{margin:2px 0 0;font-size:22px;line-height:1.2}
+h1 .kh{display:block;font-size:17px;font-weight:700}
+.bar{display:flex;align-items:center;gap:12px;margin-top:10px}
+.meter{flex:1;height:10px;border-radius:5px;background:var(--line);overflow:hidden}
+.meter i{display:block;height:100%;width:0;background:var(--accent);transition:width .25s}
+.count{font-size:14px;font-weight:600;min-width:72px;text-align:right}
+main{max-width:640px;margin:0 auto;padding:16px 18px 40px}
+.rule{background:var(--rule-bg);color:var(--rule-ink);border-radius:14px;padding:14px 16px;margin-bottom:18px}
+.rule p{margin:0}.rule .kh{font-weight:700}
+section{background:var(--surface);border:1px solid var(--line);border-radius:14px;margin-bottom:16px;overflow:hidden}
+section>h2{margin:0;padding:14px 16px 10px;font-size:18px;line-height:1.3;border-bottom:1px solid var(--line)}
+section>h2 .kh{display:block;font-size:16px}
+.step{padding:10px 16px 2px;font-weight:700;display:flex;gap:10px;align-items:flex-start}
+.step b{flex:none;width:26px;height:26px;border-radius:50%;background:var(--ink);color:var(--surface);display:flex;align-items:center;justify-content:center;font-size:14px;margin-top:2px}
+.step .kh{display:block;font-size:15px}
+ul{list-style:none;margin:0;padding:4px 0 8px}
+li button{all:unset;box-sizing:border-box;display:flex;gap:14px;align-items:flex-start;width:100%;padding:11px 16px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+li button:focus-visible{outline:3px solid var(--accent);outline-offset:-3px}
+.box{flex:none;width:26px;height:26px;border:2px solid var(--muted);border-radius:7px;margin-top:2px;display:flex;align-items:center;justify-content:center}
+.box svg{width:16px;height:16px;opacity:0}
+li .t .kh{display:block;font-size:15px}
+li .t .en{display:block;font-size:14px;color:var(--muted)}
+li.done button{background:var(--done-bg)}
+li.done .box{background:var(--done);border-color:var(--done)}
+li.done .box svg{opacity:1}
+li.done .t .kh{text-decoration:line-through;text-decoration-thickness:1px}
+.plain li{padding:8px 16px 8px 40px;position:relative}
+.plain li::before{content:"";position:absolute;left:20px;top:17px;width:7px;height:7px;border-radius:50%;background:var(--accent)}
+.tip{margin:10px 16px 0;font-size:14px;color:var(--muted)}
+.notes textarea{display:block;width:calc(100% - 32px);margin:12px 16px 8px;min-height:84px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);font:inherit;resize:vertical}
+.notes textarea:focus-visible{outline:3px solid var(--accent);outline-offset:1px}
+.row{display:flex;gap:10px;align-items:center;padding:0 16px 12px;flex-wrap:wrap}
+.row .hint{flex-basis:100%}
+.btn{all:unset;box-sizing:border-box;cursor:pointer;padding:10px 16px;border-radius:10px;font-weight:600;font-size:15px;background:var(--accent);color:var(--accent-ink)}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.btn:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+.btn[disabled]{opacity:.5;cursor:default}
+.hint{font-size:13px;color:var(--muted);margin:0}
+.nlist{padding:0 16px 14px}
+.note{border-top:1px solid var(--line);padding:10px 0}
+.note p{margin:0;white-space:pre-wrap;overflow-wrap:anywhere}
+.note small{color:var(--muted);font-size:13px}
+.nrow{display:flex;justify-content:space-between;align-items:center;margin-top:4px}
+.link{all:unset;cursor:pointer;color:var(--muted);font-size:13px;text-decoration:underline}
+.link:focus-visible{outline:2px solid var(--accent)}
+.empty{color:var(--muted);font-size:14px;padding:4px 0 6px}
+.reset{text-align:center;margin-top:24px}
+@media (prefers-reduced-motion: reduce){.meter i{transition:none}}
+</style>
+</head>
+<body>
+<header><div class="hwrap">
+  <p class="team">ICF Khnar Technic Team</p>
+  <h1><span class="kh">បញ្ជីត្រួតពិនិត្យសំឡេងថ្ងៃអាទិត្យ</span>Sunday Sound Checklist</h1>
+  <div class="bar"><div class="meter" aria-hidden="true"><i id="fill"></i></div><span class="count" id="count" aria-live="polite">0 / 0</span></div>
+</div></header>
+
+<main>
+  <div class="rule"><p class="kh">បើកឧបករណ៍បំពងសំឡេងចុងក្រោយ · បិទមុនគេ</p><p>Speakers and subwoofer: on last, off first.</p></div>
+  <div id="list"></div>
+
+  <section class="notes" aria-labelledby="nh">
+    <h2 id="nh"><span class="kh">កំណត់ចំណាំសម្រាប់សប្តាហ៍ក្រោយ</span>Notes for next week</h2>
+    <label for="nt" class="tip" style="display:block">What went wrong, what needs fixing, what the next team should know.</label>
+    <textarea id="nt" placeholder="Example: Vocal 3 mic crackles, needs a new cable."></textarea>
+    <div class="row"><button class="btn" id="addNote" type="button">Save note</button><button class="btn ghost" id="copyNotes" type="button">Copy for team chat</button><p class="hint" id="nhint"></p></div>
+    <div class="nlist" id="notes"><p class="empty">No notes yet.</p></div>
+  </section>
+
+  <div class="reset"><button class="btn ghost" id="reset" type="button">Start a new Sunday (clear all ticks)</button></div>
+</main>
+
+<script>
+const DATA = [
+  {kh:"ការបើក", en:"Turning on", steps:[
+    {n:1, kh:"បើកម៉ាស៊ីនលាយសំឡេងមុន", en:"Mixer first", items:[
+      ["ទាញ Main fader ចុះក្រោមបំផុត","Main fader all the way down"],
+      ["បើក X32 រង់ចាំអេក្រង់ដើម","Turn on the X32, wait for the home screen"],
+      ["បើក Stage box និងឧបករណ៍ទទួលមីក្រូឥតខ្សែ","Stage box and wireless receivers on"],
+      ["ផ្ទុក Sunday scene","Load the Sunday scene"]]},
+    {n:2, kh:"បើកឧបករណ៍បំពងសំឡេង និង Subwoofer ចុងក្រោយ", en:"Speakers and subwoofer last", items:[
+      ["បើកម៉ូនីទ័រ ឧបករណ៍បំពងសំឡេងធំ និង Subwoofer","Monitors, main speakers and subwoofer on"],
+      ["ដំឡើង Main fader យឺតៗ","Raise the main fader slowly"],
+      ["សាកល្បងមីក្រូមួយ","Test one mic"]]}]},
+  {kh:"ពិនិត្យខ្សែ (គ្មានក្រុមតន្ត្រី)", en:"Line check (no band)", items:[
+    ["ឆានែលនីមួយៗមានសញ្ញា (ម៉ែត្រលោត)","Every channel shows signal on the meter"],
+    ["ថ្មមីក្រូឥតខ្សែថ្មី","Fresh batteries in the wireless mics"],
+    ["Prime ឆានែល ១–៨ មានសំឡេង","Prime channels 1–8 arriving"],
+    ["Click (ch 2) និង Cue (ch 3) តែក្នុងកាសប៉ុណ្ណោះ","Click and cue in the in-ears only"],
+    ["Automix Off លើឆានែល ១–៨","Automix Off on channels 1–8"]]},
+  {kh:"លំដាប់ពិនិត្យសំឡេង", en:"Soundcheck order", tip:"Set gain, then monitor, for each person before moving on.", items:[
+    ["១ ស្គរ","Drums: kick, snare, hi-hat, toms, overheads, full kit"],
+    ["២ បាស","Bass: alone, then with the kick"],
+    ["៣ ហ្គីតាអគ្គិសនី","Electric guitars: rhythm, then lead"],
+    ["៤ ហ្គីតាអាគូស្ទិក","Acoustic guitar"],
+    ["៥ Keys និងព្យាណូ","Keys and piano: every sound they use"],
+    ["៦ បទភ្លេង Prime","Prime tracks"],
+    ["៧ សំឡេងច្រៀង","Vocals: lead, then backing; sing a chorus"],
+    ["៨ ក្រុមតន្ត្រីទាំងមូល","Full band: one song, monitors then main mix"],
+    ["៩ មីក្រូគ្រូគង្វាល និងការចាក់សំឡេង","Pastor mic, effects and playback"],
+    ["រក្សាទុក Scene (អ្នកដឹកនាំយល់ព្រម)","Save the scene (with the leader’s OK)"]]},
+  {kh:"ពេលកម្មវិធី", en:"During the service", plain:[
+    ["ពាក្យចម្រៀងត្រូវច្បាស់","Words clear above the band"],
+    ["ដំឡើងមីក្រូគ្រូគង្វាលមុនពេលនិយាយ","Pastor mic up before speaking"],
+    ["Mute មីក្រូដែលមិនប្រើ","Mute mics not in use"]]},
+  {kh:"ការបិទ", en:"Turning off", steps:[
+    {n:1, kh:"បិទឧបករណ៍បំពងសំឡេង និង Subwoofer មុន", en:"Speakers and subwoofer first", items:[
+      ["ទាញ Main fader ចុះ ហើយ Mute ឆានែល","Main fader down, mute the channels"],
+      ["បិទឧបករណ៍បំពងសំឡេងធំ Subwoofer និងម៉ូនីទ័រ","Main speakers, subwoofer and monitors off"]]},
+    {n:2, kh:"បិទម៉ាស៊ីនលាយសំឡេងចុងក្រោយ", en:"Mixer last", items:[
+      ["បិទឧបករណ៍ទទួលមីក្រូឥតខ្សែ ដាក់សាកថ្ម","Wireless receivers off, batteries charging"],
+      ["បិទ Stage box និង X32","Stage box and X32 off"],
+      ["បិទភ្លើងមេ","Main power off"]]}]}
+];
+
+const KEY = "sunday-checklist-ticks";
+let ticks = {};
+try { ticks = JSON.parse(localStorage.getItem(KEY) || "{}") || {}; } catch (e) { ticks = {}; }
+const save = () => { try { localStorage.setItem(KEY, JSON.stringify(ticks)); } catch (e) {} };
+const TICK = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+const el = (tag, cls, html) => { const e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; };
+const esc = s => s.replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+let ids = [];
+
+function itemList(items, prefix) {
+  const ul = el("ul");
+  items.forEach(([kh, en], i) => {
+    const id = prefix + "-" + i; ids.push(id);
+    const li = el("li"); li.dataset.id = id;
+    const b = el("button", null, `<span class="box">${TICK}</span><span class="t"><span class="kh">${esc(kh)}</span><span class="en">${esc(en)}</span></span>`);
+    b.type = "button"; b.setAttribute("role", "checkbox");
+    b.addEventListener("click", () => { ticks[id] = !ticks[id]; if (!ticks[id]) delete ticks[id]; save(); paint(); });
+    li.appendChild(b); ul.appendChild(li);
+  });
+  return ul;
+}
+
+function build() {
+  const root = document.getElementById("list");
+  DATA.forEach((s, si) => {
+    const sec = el("section"); const hid = "s" + si;
+    sec.setAttribute("aria-labelledby", hid);
+    const h = el("h2", null, `<span class="kh">${esc(s.kh)}</span>${esc(s.en)}`); h.id = hid; sec.appendChild(h);
+    if (s.tip) sec.appendChild(el("p", "tip", esc(s.tip)));
+    if (s.steps) s.steps.forEach(st => {
+      sec.appendChild(el("div", "step", `<b>${st.n}</b><span><span class="kh">${esc(st.kh)}</span>${esc(st.en)}</span>`));
+      sec.appendChild(itemList(st.items, `${si}-${st.n}`));
+    });
+    if (s.items) sec.appendChild(itemList(s.items, `${si}`));
+    if (s.plain) { const ul = el("ul", "plain"); s.plain.forEach(([kh, en]) => ul.appendChild(el("li", null, `<span class="kh">${esc(kh)}</span> · ${esc(en)}`))); sec.appendChild(ul); }
+    root.appendChild(sec);
+  });
+}
+
+function paint() {
+  let done = 0;
+  document.querySelectorAll("li[data-id]").forEach(li => {
+    const on = !!ticks[li.dataset.id]; if (on) done++;
+    li.classList.toggle("done", on); li.querySelector("button").setAttribute("aria-checked", on ? "true" : "false");
+  });
+  document.getElementById("count").textContent = `${done} / ${ids.length}`;
+  document.getElementById("fill").style.width = (ids.length ? done / ids.length * 100 : 0) + "%";
+}
+
+document.getElementById("reset").addEventListener("click", () => {
+  if (confirm("Clear all ticks and start a new Sunday?")) { ticks = {}; save(); paint(); window.scrollTo({top: 0}); }
+});
+
+build(); paint();
+
+/* Notes for next week: saved on this device; copy to share with the team */
+const NKEY = "sunday-checklist-notes";
+const nt = document.getElementById("nt"), addBtn = document.getElementById("addNote"), hint = document.getElementById("nhint"), box = document.getElementById("notes"), copyBtn = document.getElementById("copyNotes");
+let notes = [];
+try { notes = JSON.parse(localStorage.getItem(NKEY) || "[]") || []; } catch (e) { notes = []; }
+const saveNotes = () => { try { localStorage.setItem(NKEY, JSON.stringify(notes)); } catch (e) {} };
+const fmt = iso => { try { return new Date(iso).toLocaleDateString(undefined, {day:"numeric", month:"short", year:"numeric"}); } catch (e) { return ""; } };
+function renderNotes() {
+  box.textContent = "";
+  const list = notes.slice().sort((a, b) => b.at.localeCompare(a.at));
+  if (!list.length) { box.appendChild(el("p", "empty", "No notes yet. Add the first one above.")); return; }
+  list.forEach(n => {
+    const d = el("div", "note"); const p = el("p"); p.textContent = n.text;
+    const row = el("div", "nrow"); const sm = el("small"); sm.textContent = fmt(n.at);
+    const del = el("button", "link"); del.type = "button"; del.textContent = "Delete";
+    del.addEventListener("click", () => { if (confirm("Delete this note?")) { notes = notes.filter(x => x !== n); saveNotes(); renderNotes(); } });
+    row.append(sm, del); d.append(p, row); box.appendChild(d);
+  });
+}
+addBtn.addEventListener("click", () => {
+  const text = nt.value.trim(); if (!text) { nt.focus(); return; }
+  notes.push({text: text.slice(0, 1000), at: new Date().toISOString()}); saveNotes(); nt.value = "";
+  hint.textContent = "Saved on this device."; renderNotes();
+});
+copyBtn.addEventListener("click", async () => {
+  const done = document.querySelectorAll("li.done").length;
+  const lines = notes.slice().sort((a, b) => a.at.localeCompare(b.at)).map(n => "- " + fmt(n.at) + ": " + n.text);
+  const text = "Sunday Sound Checklist (" + fmt(new Date().toISOString()) + ")\nDone: " + done + " / " + ids.length + "\n\nNotes for next week:\n" + (lines.join("\n") || "- none");
+  try { await navigator.clipboard.writeText(text); hint.textContent = "Copied. Paste it in your team chat."; }
+  catch (e) { hint.textContent = "Couldn’t copy automatically. Select the notes and copy them by hand."; }
+});
+hint.textContent = "Notes are saved on this device. Use Copy to share them with the team.";
+renderNotes();
+</script>
+</body>
+</html>
